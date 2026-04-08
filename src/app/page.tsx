@@ -21,3 +21,20 @@ export default function Home() {
     </main>
   )
 }
+
+<script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      name: "Adverrize",
+      url: "https://www.adverrize.in",
+      logo: "https://www.adverrize.in/og-image.png",
+      sameAs: [
+        "https://www.instagram.com/",
+        "https://www.linkedin.com/",
+      ],
+    }),
+  }}
+/>
