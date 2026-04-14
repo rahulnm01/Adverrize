@@ -123,26 +123,34 @@ export function ContactSection() {
             </div>
 
             {/* Contact Details */}
-            <div className="space-y-4">
-              <div className="flex items-center gap-4 p-4 rounded-xl bg-card/50 border border-border">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                  <Mail className="w-5 h-5 text-primary" />
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground">Email</p>
-                  <p className="font-medium text-foreground">adverrize@gmail.com</p>
-                </div>
-              </div>
+<a className="cursor-pointer hover:bg-card hover:scale-[1.02] transition"
+  href={`https://mail.google.com/mail/?view=cm&to=adverrize@gmail.com&su=Free Audit&body=${encodeURIComponent(
+    `Name: ${formData.name}
+Email: ${formData.email}
+Website: ${formData.website}`
+  )}`}
+  target="_blank"
+>
+    <div className="flex items-center gap-4 p-4 rounded-xl bg-card/50 border border-border cursor-pointer hover:bg-card transition">
+    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+      <Mail className="w-5 h-5 text-primary" />
+    </div>
+    <div>
+      <p className="text-sm text-muted-foreground">Email</p>
+      <p className="font-medium text-foreground">adverrize@gmail.com</p>
+    </div>
+  </div>
+</a>
 
-              <div className="flex items-center gap-4 p-4 rounded-xl bg-card/50 border border-border">
+              {/* <div className="flex items-center gap-4 p-4 rounded-xl bg-card/50 border border-border">
                 <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
                   <Phone className="w-5 h-5 text-primary" />
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">Phone</p>
-                  <p className="font-medium text-foreground">+91 9035482556</p>
+                  <p className="font-medium text-foreground">+91 </p>
                 </div>
-              </div>
+              </div> */}
 
               {/* <div className="flex items-center gap-4 p-4 rounded-xl bg-card/50 border border-border">
                 <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
@@ -156,7 +164,7 @@ export function ContactSection() {
             </div>
           </div>
         </div>
-      </div>
+     
     </section>
   )
 }
