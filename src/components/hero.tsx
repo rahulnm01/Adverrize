@@ -17,12 +17,12 @@ export function Hero() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Left Content */}
           <div className="space-y-8">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted/50 border border-border">
-              {/* <span className="w-2 h-2 rounded-full bg-accent animate-pulse" /> */}
-              {/* <span className="text-sm text-muted-foreground">
+            {/* <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted/50 border border-border">
+              <span className="w-2 h-2 rounded-full bg-accent animate-pulse" /> 
+               <span className="text-sm text-muted-foreground">
                 Now accepting new clients for Q2 2026
-              </span> */}
-            </div>
+              </span> 
+            </div> */}
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight tracking-tight">
               <span className="text-foreground">We Turn Clicks</span>
