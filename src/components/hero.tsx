@@ -5,23 +5,23 @@ import { Button } from "@/components/ui/button"
 
 export function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center pt-0 overflow-hidden">
-      {/* Background Elements */}
+<section className="relative min-h-screen flex items-start pt-15 sm:pt-24 lg:pt-0 overflow-hidden">
+        {/* Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/4 -left-32 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
         <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,212,255,0.05),transparent_70%)]" />
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-0 pb-10 lg:py-16">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Left Content */}
           <div className="space-y-8">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted/50 border border-border">
-              <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-              <span className="text-sm text-muted-foreground">
+              {/* <span className="w-2 h-2 rounded-full bg-accent animate-pulse" /> */}
+              {/* <span className="text-sm text-muted-foreground">
                 Now accepting new clients for Q2 2026
-              </span>
+              </span> */}
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight tracking-tight">
