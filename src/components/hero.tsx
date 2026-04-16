@@ -14,15 +14,15 @@ export function Hero() {
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-0 pb-10 lg:py-16">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-10 items-center ">
           {/* Left Content */}
-          <div className="space-y-8">
-            {/* <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted/50 border border-border">
-              <span className="w-2 h-2 rounded-full bg-accent animate-pulse" /> 
+          <div className="space-y-6 -mt-20">
+             <div className="inline-flex items-center  gap-2 px-4 py-[-4]">
+             {/* <span className="w-2 h-2 rounded-full bg-accent animate-pulse" /> 
                <span className="text-sm text-muted-foreground">
                 Now accepting new clients for Q2 2026
-              </span> 
-            </div> */}
+              </span> */}
+            </div> 
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight tracking-tight">
               <span className="text-foreground">We Turn Clicks</span>

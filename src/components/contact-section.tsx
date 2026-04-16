@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Send, Mail, Phone, MapPin, ArrowRight } from "lucide-react"
+import { Send, Mail, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
@@ -13,10 +13,41 @@ export function ContactSection() {
     website: "",
   })
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [loading, setLoading] = useState(false)
+
+  // ✅ UPDATED SUBMIT FUNCTION
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submission
-    console.log("Form submitted:", formData)
+    setLoading(true)
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
+
+      const data = await res.json()
+
+      if (data.success) {
+        alert("Form submitted successfully ✅")
+
+        // reset form
+        setFormData({
+          name: "",
+          email: "",
+          website: "",
+        })
+      } else {
+        alert("Something went wrong ❌")
+      }
+    } catch (error) {
+      alert("Error submitting form ❌")
+    }
+
+    setLoading(false)
   }
 
   return (
@@ -24,23 +55,25 @@ export function ContactSection() {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,212,255,0.05),transparent_70%)]" />
       
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
+        
+        {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <Badge variant="outline" className="mb-4 rounded-full px-4 py-1.5 border-primary/30 text-primary">
+          <Badge className="mb-4 rounded-full px-4 py-1.5 border-primary/30 text-primary">
             Get In Touch
           </Badge>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-6 text-balance">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
             Let's Make Something Great Together!
           </h2>
-          <p className="text-lg text-muted-foreground leading-relaxed">
+          <p className="text-lg text-muted-foreground">
             Ready to scale your business? Book a free audit and discover untapped growth opportunities.
           </p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
-          {/* Left - Contact Form */}
+
+          {/* LEFT - FORM */}
           <div className="bg-card/80 border border-border rounded-2xl p-6 lg:p-10">
-            <h3 className="text-2xl font-semibold text-foreground mb-2">
+            <h3 className="text-2xl font-semibold mb-2">
               Book Your Free Audit
             </h3>
             <p className="text-muted-foreground mb-8">
@@ -48,123 +81,98 @@ export function ContactSection() {
             </p>
 
             <form onSubmit={handleSubmit} className="space-y-6">
+
+              {/* NAME */}
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
+                <label className="block text-sm font-medium mb-2">
                   Name
                 </label>
                 <Input
-                  id="name"
                   type="text"
                   placeholder="Your name"
                   value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="bg-muted/50 border-border focus:border-primary h-12 rounded-xl"
+                  onChange={(e) =>
+                    setFormData({ ...formData, name: e.target.value })
+                  }
                   required
                 />
               </div>
 
+              {/* EMAIL */}
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
+                <label className="block text-sm font-medium mb-2">
                   Email
                 </label>
                 <Input
-                  id="email"
                   type="email"
                   placeholder="your@email.com"
                   value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="bg-muted/50 border-border focus:border-primary h-12 rounded-xl"
+                  onChange={(e) =>
+                    setFormData({ ...formData, email: e.target.value })
+                  }
                   required
                 />
               </div>
 
+              {/* WEBSITE */}
               <div>
-                <label htmlFor="website" className="block text-sm font-medium text-foreground mb-2">
+                <label className="block text-sm font-medium mb-2">
                   Website URL
                 </label>
                 <Input
-                  id="website"
                   type="url"
                   placeholder="https://yourwebsite.com"
                   value={formData.website}
-                  onChange={(e) => setFormData({ ...formData, website: e.target.value })}
-                  className="bg-muted/50 border-border focus:border-primary h-12 rounded-xl"
+                  onChange={(e) =>
+                    setFormData({ ...formData, website: e.target.value })
+                  }
                 />
               </div>
 
+              {/* SUBMIT BUTTON */}
               <Button
                 type="submit"
-                size="lg"
-                className="w-full bg-primary text-primary-foreground hover:bg-primary/90 rounded-xl h-12 text-base font-semibold group"
+                className="w-full h-12 text-base font-semibold"
+                disabled={loading}
               >
-                Get Free Audit
-                <Send className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                {loading ? "Submitting..." : "Get Free Audit"}
+                <Send className="ml-2 w-5 h-5" />
               </Button>
+
             </form>
           </div>
 
-          {/* Right - Contact Info & CTA */}
+          {/* RIGHT SIDE */}
           <div className="flex flex-col justify-center space-y-8">
-            {/* Big CTA */}
-            <div className="bg-gradient-to-br from-primary/10 to-accent/10 border border-primary/20 rounded-2xl p-8 lg:p-10">
-              <h3 className="text-2xl lg:text-3xl font-bold text-foreground mb-4">
+
+            {/* CTA */}
+            <div className="bg-gradient-to-br from-primary/10 to-accent/10 border border-primary/20 rounded-2xl p-8">
+              <h3 className="text-2xl font-bold mb-4">
                 Have a Project in Mind?
               </h3>
-              <p className="text-muted-foreground mb-6 leading-relaxed">
-                We'd love to hear about your goals and how we can help you achieve them. Let's discuss your next big project.
+              <p className="text-muted-foreground mb-6">
+                We'd love to hear about your goals and help you achieve them.
               </p>
-              <Button
-                size="lg"
-                className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-8 group"
-              >
+              <Button className="rounded-full px-8">
                 Contact Us
-                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
             </div>
 
-            {/* Contact Details */}
-<a className="cursor-pointer hover:bg-card hover:scale-[1.02] transition"
-  href={`https://mail.google.com/mail/?view=cm&to=adverrize@gmail.com&su=Free Audit&body=${encodeURIComponent(
-    `Name: ${formData.name}
-Email: ${formData.email}
-Website: ${formData.website}`
-  )}`}
-  target="_blank"
->
-    <div className="flex items-center gap-4 p-4 rounded-xl bg-card/50 border border-border cursor-pointer hover:bg-card transition">
-    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-      <Mail className="w-5 h-5 text-primary" />
-    </div>
-    <div>
-      <p className="text-sm text-muted-foreground">Email</p>
-      <p className="font-medium text-foreground">adverrize@gmail.com</p>
-    </div>
-  </div>
-</a>
-
-              {/* <div className="flex items-center gap-4 p-4 rounded-xl bg-card/50 border border-border">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                  <Phone className="w-5 h-5 text-primary" />
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground">Phone</p>
-                  <p className="font-medium text-foreground">+91 </p>
-                </div>
-              </div> */}
-
-              {/* <div className="flex items-center gap-4 p-4 rounded-xl bg-card/50 border border-border">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                  <MapPin className="w-5 h-5 text-primary" />
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground">Location</p>
-                  <p className="font-medium text-foreground">Delhi NCR, India</p>
-                </div>
-              </div> */}
+            {/* EMAIL BOX */}
+            <div className="flex items-center gap-4 p-4 rounded-xl bg-card border border-border">
+              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                <Mail className="w-5 h-5 text-primary" />
+              </div>
+              <div>
+                <p className="text-sm text-muted-foreground">Email</p>
+                <p className="font-medium">adverrize@gmail.com</p>
+              </div>
             </div>
+
           </div>
         </div>
-     
+      </div>
     </section>
   )
 }
