@@ -17,7 +17,7 @@ export function Hero() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-10 items-center ">
           {/* Left Content */}
           <div className="space-y-6 -mt-20">
-             <div className="inline-flex items-center  gap-2 px-4 py-[-4]">
+             <div className="inline-flex items-center  gap-2 px-4 py-8">
              {/* <span className="w-2 h-2 rounded-full bg-accent animate-pulse" /> 
                <span className="text-sm text-muted-foreground">
                 Now accepting new clients for Q2 2026
